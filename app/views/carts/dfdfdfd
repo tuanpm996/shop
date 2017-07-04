@@ -1,0 +1,75 @@
+<div class='container'>
+   <h1>Cart #<%=session[:cart_id]%> </h1>
+   <div class="row">
+     <%=form_for(@cart) do |cart| %>
+       <%@cart.products.each do |p| %>
+         <%=form_for(p, url: edit_cart_path(p),method: "post", remote: true) do |f|%> 
+         <%=hidden_field_tag( :product_id,p.id)%> 
+            <div class="col-md-3">
+               <div class="box">
+                  <div class="box-header">
+                     <%=p.name%>
+                  </div>
+                  <div class="box-body">
+                     <p><%=p.description%></p>
+                     <div class="price">
+                        <p>
+                           <b>Price:</b>
+                           $<%=p.price%>
+                        </p>
+                     </div>
+                  </div>
+
+
+                  <div class="box-footter">
+                     <form class="new_item" id="new_item" action=edit_cart_path(p) accept-charset="UTF-8" data-remote="true" method="post">
+                        <input name="utf8" type="hidden" value="✓">
+                        <div class="row">
+                           
+                           <div class="col-xs-6">
+                              <input value=<%=@cart.cartItem.find_by(product_id: p.id).quantity%> min="1" class="form-control" type="number" name="quantity" id="item_quantity">
+                           </div>
+                            
+                           <%= submit_tag("Remove", :onclick => "remove_fields(this)", class:"btn btn-danger")%>
+                           <%= submit_tag("test", class:"btn btn-danger")%>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            
+         <%end%>
+         <%byebug%>
+       <%end%>
+       <input type="submit" name="commit" value="Save changes" class="btn btn-primary" data-disable-with="Save changes" />
+       <%=link_to "Save Changes", url:edit_cart_path() %>
+     <%end%>
+  </div>    
+  <div class='footer'>
+       <a data-confirm="You sure?" class="btn btn-warning" rel="nofollow" data-method="delete" href="/carts/41">Delete</a>
+       
+       <%=link_to "Delete", url:edit_cart_path(@cart), method: :delete%>
+       
+
+  </div> 
+</div>
+
+
+
+if (session[:cart_id] && Cart.find_by(id:session[:cart_id]))
+         if Cart.find_by(id:session[:cart_id]).cartItem.find_by(product_id: params[:product_id])
+           Cart.find_by(id:session[:cart_id]).cartItem.find_by(product_id: params[:product_id]).update_attribute(:quantity, params[:quantity])
+         else
+           Cart.find_by(id:session[:cart_id]).cartItem.build(product_id: product_id, quantity:params[:quantity]).save
+         end
+         # byebug
+       else
+          @cart=Cart.new()
+          @cart.save
+          session[:cart_id] = Cart.last.id
+          @cart.cartItem.build(product_id: product_id, quantity:params[:quantity]).save
+       end
+
+        respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js

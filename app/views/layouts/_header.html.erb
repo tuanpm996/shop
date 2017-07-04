@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+      <div class="navbar-header">
+         <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#cart_shopping_collapse" data-toggle="collapse" type="button">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand">
+         Cart shopping
+         </a>
+      </div>
+      <div class="collapse navbar-collapse" id="cart_shopping_collapse">
+         <ul class="nav navbar-nav">
+            <li>
+               <%= link_to "Home", root_path%>
+            </li>
+            <li>
+               <!-- <a href="http://45.55.62.209:8080/products">Product</a> -->
+               <%= link_to "Product", '#' %>
+            </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+            <li>
+               <!-- <a href="http://45.55.62.209:8080/carts/1">Cart</a> -->
+               <%= link_to "Cart", edit_cart_path(session[:cart_id]) %>
+            </li>
+         </ul>
+      </div>
+   </div>
+</nav>

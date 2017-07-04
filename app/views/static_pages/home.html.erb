@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   </head>
+   <body>
+      <%=render 'layouts/header' %>
+      <div class="container">
+      <h1>All products</h1>
+      <h4></h4>
+      <div class="row">
+         <% @products.each do |p| %> 
+         <%=form_for(p, url: edit_cart_path(p),method: "post", remote: true) do |f|%> 
+         <%=hidden_field_tag( :product_id,p.id)%> 
+            <div class="col-md-3">
+               <div class="box">
+                  <div class="box-header">
+                     <%=p.name%>
+                  </div>
+                  <div class="box-body">
+                     <p><%=p.description%></p>
+                     <div class="price">
+                        <p>
+                           <b>Price:</b>
+                           $<%=p.price%>
+                        </p>
+                     </div>
+                  </div>
+
+
+                  <div class="box-footter">
+                     <form class="new_item" id="new_item" action=edit_cart_path(p) accept-charset="UTF-8" data-remote="true" method="post">
+                        <input name="utf8" type="hidden" value="✓">
+                        <div class="row">
+                           
+                           <div class="col-xs-6">
+                              <input value="1" type="hidden" name="quantity[product_id]" id="item_product_id">
+                              <input value="1" min="1" class="form-control" type="number" name="quantity" id="item_quantity">
+                           </div>
+                            
+                           <%= submit_tag("Add to cart", class:"btn btn-success")%>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            
+         <%end%>
+            
+         <% end %>
+         </div>
+      </div>
+   </body>
+</html>
+
+
