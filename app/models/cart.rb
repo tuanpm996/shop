@@ -3,6 +3,6 @@ class Cart < ApplicationRecord
                       foreign_key: "cart_id",
                       dependent: :destroy
   has_many :products, through: :cartItems, source: :product
-  accepts_nested_attributes_for :products
-  # accepts_nested_attributes_for :cartItem
+  accepts_nested_attributes_for :products, allow_destroy: true
+  accepts_nested_attributes_for :cartItems, allow_destroy: true
 end

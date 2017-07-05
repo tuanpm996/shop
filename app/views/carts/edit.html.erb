@@ -1,56 +1,44 @@
 <title>CartShopping</title>
 <%=render 'layouts/header' %>  
-<%= form_for(@cart) do |c|%>
-  <%= c.fields_for :cartItem do |ff| %>
-      
-  
+
+<div class='container'>
+<h1>Cart #<%=session[:cart_id]%></h1>
+<%= form_for @cart do |f| %>
+  <%= f.fields_for :cartItems do |cartItem| %>
+    <div class='row'>
+        <div class='col-md-3'>
+          <div class='box'>
+            <div class='box-header'>
+              <%=cartItem.object.product.name%>
+            </div>
+            <div class='box-body'>   
+               <%=cartItem.object.product.description%>
+               <div class='price'>
+                 <p>
+                   <b>Price:</b>
+                     $<%=cartItem.object.product.price%>
+                   </p>
+               </div>
+            </div>
+            <div class='box-footter'>
+                <div class='row'>
+                  <div class='col-xs-6'>
+                    <%=cartItem.number_field:quantity, :value => cartItem.object.quantity %>
+                  </div>
+                </div>
+                Remove: <%= cartItem.check_box :_destroy,class:"btn btn-danger btn-sm"%>
+
+            </div>
+          </div>
+        </div>
+        <div>
+          
+        </div>
+    </div>  
+  <%end%>
+  <div class='footer'>
+  <%=link_to "Delete",cart_path(@cart.id) ,method: :delete %>
+  <%=f.submit 'Save changes', class:"btn btn-primary"  %>
 </div>
-  <% end %>
   
-  <% @cart.products.each do |p|%>
-  <%end%>   
-      
-  <%= c.submit "Create my account", class: "btn btn-primary" %>
-<%end%>
-
------------------------------------------------------
-<%= form_for @cart do |f| %>
-   <%=f.text_field :id%>
-     <%@cart.cartItems.each do |aa| %>
-       <%=fields_for(aa) do |b|%>
-         <%=Product.find(aa.product_id).name%>
-         <%=b.hidden_field :product_id%>
-         <%=b.text_field :quantity,class: "form-control"%>
-       <%end%>
-       <%=aa.product.name %>
-       <%=aa.quantity%>
-       <br>
-   <%end%>
-   <%= f.submit "Update" %>
-<% end %>
----------------------------------------------------------------------------------------
-<%= form_for @cart do |f| %>
-   <%@cart.cartItems.each do |cart| %>
-     <%= f.fields_for :cartItems do |cartItem| %>
-       <%=cartItem.text_field :quantity, :value =>cart.quantity %>
-     <%end%>
-   <%end%>
-    
-  <%= f.submit "Update" %>
-<% end %>
-
-
-----------------------------------------------------------
-
-
-<br>
-fdfdfdfdf
-
-<%= form_for @cart do |f| %>
-  <% @cart.cartItems.each do |cartItem| %>
-     <%=f.fields_for :cartItems, cartItem do |c| %>
-
-     <%end%>
-  <% end %>
- <%=f.submit "Update" %>
-<% end %>fdf
+<%end%>  

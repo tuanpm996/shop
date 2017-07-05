@@ -4,7 +4,7 @@
   <% @cart.products.each do |p|%>
     <%=form_for(p) do |d|%>
       <%= p.name %>
-      <input value=<%=@cart.cartItem.find_by(product_id: p.id).quantity%> min="1" class="form-control" type="number" name="quantity" id="item_quantity">
+      <input value=<%=@cart.cartItems.find_by(product_id: p.id).quantity%> min="1" class="form-control" type="number" name="quantity" id="item_quantity">
     <%end%>
   <%end%>
   <%= c.submit "Create my account", class: "btn btn-primary" %>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+      <title>CartShopping</title>
+      <meta name="csrf-param" content="authenticity_token" />
+      <meta name="csrf-token" content="S2BhYwtse0MzH50tLsxAb+6ACz/UeByUWKRdYSXmA0/teoJZCxj0q2Ja4XFaELWLcRbpbkb4FpRINr23l/cQug==" />
+      <link rel="stylesheet" media="all" href="/assets/application-711ca2036b14ef76cae2efb064b842031414bdd0ba50c2b977aa3f929285947a.css" data-turbolinks-track="reload" />
+      <script src="/assets/application-f214e53ad2b878a8e1d1fca33eab9ccda1d4c669f28ff259357ac0dc6a2d44fd.js" data-turbolinks-track="reload"></script>
+   </head>
+   <body>
+      <nav class='navbar navbar-inverse navbar-fixed-top'>
+         <div class='container'>
+            <div class='navbar-header'>
+               <button aria-expanded='false' class='navbar-toggle collapsed' data-target='#cart_shopping_collapse' data-toggle='collapse' type='button'>
+               <span class='sr-only'>Toggle navigation</span>
+               <span class='icon-bar'></span>
+               <span class='icon-bar'></span>
+               <span class='icon-bar'></span>
+               </button>
+               <a class='navbar-brand'>
+               Cart shopping
+               </a>
+            </div>
+            <div class='collapse navbar-collapse' id='cart_shopping_collapse'>
+               <ul class='nav navbar-nav'>
+                  <li>
+                     <a href="/">Home</a>
+                  </li>
+                  <li>
+                     <a href="/products">Product</a>
+                  </li>
+               </ul>
+               <ul class='nav navbar-nav navbar-right'>
+                  <li>
+                     <a href="/carts/46">Cart</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <div class='container'>
+         <h1>Cart #46</h1>
+         <form class="edit_cart" id="edit_cart_46" action="/carts/46" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="ynK7388AWHts+ruuYDSoBbNFhWJeRWDBy9YcvItvgofv25Q+hYWHCkjWEly/xb8autLpNt2E1D7N53ZOTxmE3g==" />
+            <div class='row'>
+               <div class='col-md-3'>
+                  <div class='box'>
+                     <div class='box-header'>
+                        Hillbilly Elegy: A Memoir of a Family
+                     </div>
+                     <div class='box-body'>
+                        <p>From a former marine and Yale Law School graduate</p>
+                        <div class='price'>
+                           <p>
+                              <b>Price:</b>
+                              $15
+                           </p>
+                        </div>
+                     </div>
+                     <div class='box-footter'>
+                        <div class='row'>
+                           <div class='col-xs-6'>
+                              <input class="form-control" type="number" value="1" name="cart[items_attributes][0][quantity]" id="cart_items_attributes_0_quantity" />
+                           </div>
+                           <div class='col-xs-6'>
+                              <input type="hidden" value="false" name="cart[items_attributes][0][_destroy]" id="cart_items_attributes_0__destroy" /><a class="btn btn-danger btn-sm" href="#" onclick="remove_fields(this); return false;">Remove</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <input type="hidden" value="88" name="cart[items_attributes][0][id]" id="cart_items_attributes_0_id" />
+            </div>
+            <div class='footer'>
+               <a data-confirm="You sure?" class="btn btn-warning" rel="nofollow" data-method="delete" href="/carts/46">Delete</a>
+               <input type="submit" name="commit" value="Save changes" class="btn btn-primary" data-disable-with="Save changes" />
+            </div>
+         </form>
+      </div>
+   </body>
+</html>
