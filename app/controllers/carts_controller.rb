@@ -15,7 +15,7 @@ class CartsController < ApplicationController
     if (product_id)
       if (cart_id && Cart.find(cart_id))
         byebug
-         if Cart.find(session[:cart_id]).cartItems.find_by(id: product_id)
+         if Cart.find(cart_id).cartItems.find_by(id: product_id)
            Cart.find(cart_id).cartItems.find(product_id).update_attribute(:quantity, quantity)
          else
            Cart.find(cart_id).cartItems.build(product_id: product_id, quantity:quantity).save
@@ -24,7 +24,7 @@ class CartsController < ApplicationController
           @cart=Cart.new()
           @cart.save
           session[:cart_id] = Cart.last.id
-          @cart.cartItems.build(product_id: params[:product_id], quantity:quantity).save
+          @cart.cartItems.build(product_id: product_id, quantity:quantity).save
       end
     else
       @cart = Cart.find(session[:cart_id])
@@ -38,7 +38,6 @@ class CartsController < ApplicationController
     session[:cart_id] = Cart.last.id
     @cart = Cart.find_by(id: session[:cart_id])
     if @cart.cartItems.count != 0
-      
     else
       redirect_to root_path
     end
@@ -47,11 +46,11 @@ class CartsController < ApplicationController
 
 
   def destroy
-   session[:cart_id] = nil
-   @cart=Cart.new()
-   @cart.save
-   session[:cart_id] = @cart.id
-   redirect_to root_path
+    session[:cart_id] = nil
+    @cart=Cart.new()
+    @cart.save
+    session[:cart_id] = @cart.id
+    redirect_to root_path
   end
 
   def update
