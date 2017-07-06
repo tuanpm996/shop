@@ -17,13 +17,11 @@
                <%= link_to "Home", root_path%>
             </li>
             <li>
-               <!-- <a href="http://45.55.62.209:8080/products">Product</a> -->
-               <%= link_to "Product", '#' %>
+               <%= link_to "Product", root_path %>
             </li>
          </ul>
          <ul class="nav navbar-nav navbar-right">
             <li>
-               <!-- <a href="http://45.55.62.209:8080/carts/1">Cart</a> -->
                <%= link_to "Cart", edit_cart_path(session[:cart_id]) %>
             </li>
          </ul>

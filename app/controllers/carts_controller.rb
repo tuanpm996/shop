@@ -1,22 +1,20 @@
 class CartsController < ApplicationController
   include ApplicationHelper	
-  
 
   def edit
-    byebug
     session[:cart_id] = Cart.last.id
     cart_id = session[:cart_id]
     product_id = params[:product_id]
     quantity = params[:quantity]
     @cart = Cart.find_by(id: cart_id)
-    if(@cart.cartItems.count == 0)
+    if @cart.cartItems.count == 0
       redirect_to root_path
     end
-    if (product_id)
+    if product_id
+      
       if (cart_id && Cart.find(cart_id))
-        byebug
-         if Cart.find(cart_id).cartItems.find_by(id: product_id)
-           Cart.find(cart_id).cartItems.find(product_id).update_attribute(:quantity, quantity)
+         if Cart.find(cart_id).cartItems.find_by(product_id: product_id)
+           Cart.find(cart_id).cartItems.find_by(product_id:product_id).update_attribute(:quantity, quantity)
          else
            Cart.find(cart_id).cartItems.build(product_id: product_id, quantity:quantity).save
          end
@@ -33,18 +31,6 @@ class CartsController < ApplicationController
     
   end
 
-
-  def show
-    session[:cart_id] = Cart.last.id
-    @cart = Cart.find_by(id: session[:cart_id])
-    if @cart.cartItems.count != 0
-    else
-      redirect_to root_path
-    end
-    
-  end
-
-
   def destroy
     session[:cart_id] = nil
     @cart=Cart.new()
@@ -58,6 +44,7 @@ class CartsController < ApplicationController
     @cart.update_attributes(cart_params)
     redirect_to edit_cart_path
   end
+
 
   private
     def create
