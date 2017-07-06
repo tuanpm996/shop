@@ -4,7 +4,7 @@ RSpec.describe CartsController, type: :controller do
 	
   context 'and a context with another variable' do 
 	  cart=Cart.create!()
-	  product = Product.create!(name:"fdfdfd", description: "fdfdfd", price:45)	
+	  product = Product.create!(name:"Book", description: "About", price: 45)	
 
 	  it "redirect to root if cart is empty" do
 		  get 'edit', params: {id: cart.id}

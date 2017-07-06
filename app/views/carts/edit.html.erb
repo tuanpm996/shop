@@ -2,43 +2,47 @@
 <%=render 'layouts/header' %>  
 
 <div class='container'>
-<h1>Cart #<%=session[:cart_id]%></h1>
-<%= form_for @cart do |f| %>
-  <%= f.fields_for :cartItems do |cartItem| %>
+  <h1>Cart #<%=session[:cart_id]%></h1>
+  <%= form_for @cart do |f| %>
     <div class='row'>
+      <%= f.fields_for :cartItems do |cartItem| %>
         <div class='col-md-3'>
           <div class='box'>
             <div class='box-header'>
               <%=cartItem.object.product.name%>
             </div>
             <div class='box-body'>   
-               <%=cartItem.object.product.description%>
-               <div class='price'>
-                 <p>
-                   <b>Price:</b>
-                     $<%=cartItem.object.product.price%>
-                   </p>
-               </div>
+              <%=cartItem.object.product.description%>
+              <div class='price'>
+                <p>
+                  <b>Price:</b>
+                  $<%=cartItem.object.product.price%>
+                </p>
+              </div>
             </div>
             <div class='box-footter'>
-                <div class='row'>
-                  <div class='col-xs-6'>
-                    <%=cartItem.number_field:quantity, :value => cartItem.object.quantity %>
-                  </div>
+              <div class='row'>
+                <div class='col-xs-6'>
+                  <%=cartItem.number_field:quantity, :value => cartItem.object.quantity %>
                 </div>
-                Remove: <%= cartItem.check_box :_destroy,class:"btn btn-danger btn-sm"%>
-
+              </div>
+              Remove: <%= cartItem.check_box :_destroy%>
             </div>
           </div>
-        </div>
-        <div>
-          
-        </div>
-    </div>  
-  <%end%>
-  <div class='footer'>
-  <%=link_to "Delete",cart_path(@cart.id) ,method: :delete %>
-  <%=f.submit 'Save changes', class:"btn btn-primary"  %>
+        </div> 
+      <%end%>
+    </div>
+    <div class='footer'>
+      <%=link_to "Delete",cart_path(@cart.id) ,method: :delete %>
+      <%=f.submit 'Save changes', class:"btn btn-primary"  %>
+    </div>
+  <%end%> 
 </div>
-  
-<%end%>  
+
+
+
+
+
+
+
+
